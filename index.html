@@ -6,11 +6,15 @@
     <title>Danila Greppi | Marketing Inmobiliario Estratégico Saavedra y Nuñez</title>
     <meta name="description" content="Especialista en venta de propiedades en Saavedra y Nuñez. Marketing digital avanzado, home staging y estrategia real para dueños que buscan resultados.">
     
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-XXXXXX');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SXNPK00MFN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SXNPK00MFN');
+  gtag('config', 'AW-11191760775'); // <--- AGREGÁ ESTA LÍNEA AQUÍ
+</script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -514,8 +518,7 @@
             const situacion = situacionSelect.value;
             const tiempo = tiempoInput.value;
 
-            // 1. DISPARAR EVENTO PARA GOOGLE (Conversión)
-            // Esto crea un evento que Google Tag Manager puede leer fácilmente
+            // --- ESTE ES EL CAMBIO PARA GOOGLE ADS ---
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
                 'event': 'form_submission_whatsapp',
@@ -523,7 +526,11 @@
                 'user_situacion': situacion
             });
 
-            // 2. CONSTRUIR MENSAJE DE WHATSAPP
+            // AGREGÁ ESTO AQUÍ ABAJO:
+            gtag('event', 'conversion', {
+                'send_to': 'AW-11191760775/JPm1CJ_K09sbEIfv0tgp'
+            });
+
             let mensajeFinal = "";
             if (situacion === 'ya-publicado') {
                 mensajeFinal = `Hola Danila! Soy ${nombre}. Tengo un ${tipo} en ${direccion} que ya está publicado pero no se vende. Contexto: ${tiempo}. Necesito tu marketing estratégico.`;
@@ -531,12 +538,13 @@
                 mensajeFinal = `Hola Danila! Soy ${nombre}. Quiero vender mi ${tipo} en ${direccion}. Es la primera vez que publico y quiero arrancar con tu estrategia desde cero.`;
             }
 
-            // 3. REDIRECCIÓN (con un mini delay para asegurar que el evento de Google se envíe)
+            // El delay de 300ms es clave: le da tiempo a Google Ads de registrar el clic antes de abrir WhatsApp
             setTimeout(() => {
                 const url = `https://wa.me/5491131635778?text=${encodeURIComponent(mensajeFinal)}`;
                 window.open(url, '_blank');
-            }, 100);
+            }, 300);
         });
     </script>
+
 </body>
 </html>
