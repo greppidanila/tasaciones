@@ -13,7 +13,7 @@
   gtag('js', new Date());
 
   gtag('config', 'G-SXNPK00MFN');
-  gtag('config', 'AW-11191760775'); // <--- AGREGÁ ESTA LÍNEA AQUÍ
+  gtag('config', 'AW-11191760775'); // Conecta tu cuenta de Ads
 </script>
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -41,15 +41,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SXNPK00MFN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-SXNPK00MFN');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SXNPK00MFN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-SXNPK00MFN');
+      gtag('config', 'AW-11191760775'); // Conexión a tu cuenta de Ads
+    </script>
+    
     <style>
         :root { --brand-orange: #ff8017; --brand-pink: #e00079; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; background-color: #fff; }
@@ -564,8 +566,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             const tipo = document.getElementById('tipo').value;
             const situacion = situacionSelect.value;
             const tiempo = tiempoInput.value;
-
-            // --- ESTE ES EL CAMBIO PARA GOOGLE ADS ---
+            
+            // 1. DISPARAR EVENTO PARA GOOGLE (Conversión)
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
                 'event': 'form_submission_whatsapp',
@@ -573,9 +575,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 'user_situacion': situacion
             });
 
-            // AGREGÁ ESTO AQUÍ ABAJO:
+            // ESTO ES LO QUE IMPORTA DE TU NUEVO SNIPPET:
             gtag('event', 'conversion', {
-                'send_to': 'AW-11191760775/JPm1CJ_K09sbEIfv0tgp'
+                'send_to': 'AW-11191760775/MnhwCOj1od0bEIfv0tgp'
             });
 
             let mensajeFinal = "";
