@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danila Greppi | Marketing Inmobiliario Estratégico Saavedra y Nuñez</title>
-    <meta name="description" content="Especialista en venta de propiedades en Saavedra y Nuñez. Marketing digital avanzado, home staging y estrategia real para dueños que buscan resultados.">
+    <meta name="description" content="Especialista en venta de propiedades y terrenos en Saavedra y Nuñez. Marketing digital avanzado, home staging y estrategia real para dueños que buscan resultados.">
     
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -228,6 +228,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 <h4 class="text-xl font-black uppercase tracking-tighter text-slate-900 mb-2 italic">Impacto Off-line</h4>
                                 <p class="text-sm text-slate-500 font-medium italic leading-relaxed">
                                     Colocamos <span class="text-slate-900 font-bold">cartelería premium</span> diseñada para destacar en el barrio. Presencia impecable en la calle y en la web.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group p-8 bg-white/70 backdrop-blur-md rounded-[2.5rem] border border-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.05)] hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-500">
+                        <div class="flex items-start gap-6">
+                            <div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-400 flex items-center justify-center text-white shadow-lg shadow-emerald-200">
+                                <span class="font-black italic text-xl">04</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-black uppercase tracking-tighter text-slate-900 mb-2 italic">Estudio de Edificabilidad</h4>
+                                <p class="text-sm text-slate-500 font-medium italic leading-relaxed">
+                                    Calculamos los <span class="text-emerald-600 font-bold">m² vendibles e incidencia</span> según el nuevo código. Hablamos el lenguaje de los desarrolladores para defender tu tierra.
                                 </p>
                             </div>
                         </div>
@@ -533,67 +546,87 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             Dejá de esperar, vendé hoy
         </a>
     </div>
+<script>
+    // 1. Control del botón flotante (CTA) en móviles
+    window.addEventListener('scroll', () => {
+        const cta = document.getElementById('fixed-cta');
+        if (window.scrollY > 400) { 
+            cta.classList.add('show'); 
+        } else { 
+            cta.classList.remove('show'); 
+        }
+    });
 
-    <script>
-        window.addEventListener('scroll', () => {
-            const cta = document.getElementById('fixed-cta');
-            if (window.scrollY > 400) { cta.classList.add('show'); } 
-            else { cta.classList.remove('show'); }
-        });
+    // 2. Variables del Formulario
+    const situacionSelect = document.getElementById('situacion');
+    const tipoSelect = document.getElementById('tipo'); 
+    const wrapperTiempo = document.getElementById('wrapper-tiempo');
+    const tiempoInput = document.getElementById('tiempo');
 
-        const situacionSelect = document.getElementById('situacion');
-        const wrapperTiempo = document.getElementById('wrapper-tiempo');
-        const tiempoInput = document.getElementById('tiempo');
+    // 3. Lógica dinámica: Cambia el comportamiento según el tipo de propiedad o situación
+    function actualizarFormulario() {
+        const esLote = tipoSelect.value === 'Casa / PH' || tipoSelect.value === 'Departamento' || tipoSelect.value === 'Lote / Terreno'; 
+        // Nota: Forzamos la visibilidad si es Lote, o si la situación es "ya-publicado"
+        const mostrarCampoExtra = (situacionSelect.value === 'ya-publicado') || (tipoSelect.value === 'Lote / Terreno');
 
-        situacionSelect.addEventListener('change', function() {
-            if (this.value === 'ya-publicado') {
-                wrapperTiempo.classList.remove('hidden');
-                tiempoInput.required = true;
-                setTimeout(() => tiempoInput.focus(), 100);
+        if (mostrarCampoExtra) {
+            wrapperTiempo.classList.remove('hidden');
+            tiempoInput.required = true;
+            
+            // Si es lote, pedimos datos técnicos específicamente
+            if (tipoSelect.value === 'Lote / Terreno') {
+                tiempoInput.placeholder = "¿Tenés un estudio de pre-factibilidad o sabés cuántos m² salen? Si no sabés, contame qué hay construido hoy.";
             } else {
-                wrapperTiempo.classList.add('hidden');
-                tiempoInput.required = false;
-                tiempoInput.value = ''; 
+                // Si es casa/depto ya publicado
+                tiempoInput.placeholder = "¿Hace cuánto está publicada y por qué creés que no se vende? (Sé lo más detallista posible) *";
             }
-        });
+        } else {
+            // Si es venta por primera vez de casa/depto, ocultamos el campo extra
+            wrapperTiempo.classList.add('hidden');
+            tiempoInput.required = false;
+            tiempoInput.value = ''; 
+        }
+    }
 
-        // MANEJO DEL ENVÍO + MEDICIÓN DE CONVERSIÓN
-        document.getElementById('propietarioForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nombre = document.getElementById('nombre').value;
-            const direccion = document.getElementById('direccion').value;
-            const tipo = document.getElementById('tipo').value;
-            const situacion = situacionSelect.value;
-            const tiempo = tiempoInput.value;
-            
-            // 1. DISPARAR EVENTO PARA GOOGLE (Conversión)
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-                'event': 'form_submission_whatsapp',
-                'form_type': 'diagnostico_propiedad',
-                'user_situacion': situacion
-            });
+    // Escuchar cambios en los selectores
+    situacionSelect.addEventListener('change', actualizarFormulario);
+    tipoSelect.addEventListener('change', actualizarFormulario);
 
-            // ESTO ES LO QUE IMPORTA DE TU NUEVO SNIPPET:
+    // 4. Manejo del Envío + Conversión de Google Ads
+    document.getElementById('propietarioForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const nombre = document.getElementById('nombre').value;
+        const direccion = document.getElementById('direccion').value;
+        const tipo = tipoSelect.value;
+        const situacion = situacionSelect.value;
+        const tiempo = tiempoInput.value;
+        
+        // Disparar evento de conversión para Google Ads
+        if (typeof gtag === 'function') {
             gtag('event', 'conversion', {
                 'send_to': 'AW-11191760775/MnhwCOj1od0bEIfv0tgp'
             });
+        }
 
-            let mensajeFinal = "";
-            if (situacion === 'ya-publicado') {
-                mensajeFinal = `Hola Danila! Soy ${nombre}. Tengo un ${tipo} en ${direccion} que ya está publicado pero no se vende. Contexto: ${tiempo}. Necesito tu marketing estratégico.`;
-            } else {
-                mensajeFinal = `Hola Danila! Soy ${nombre}. Quiero vender mi ${tipo} en ${direccion}. Es la primera vez que publico y quiero arrancar con tu estrategia desde cero.`;
-            }
+        // Construcción del mensaje de WhatsApp personalizado
+        let mensajeFinal = "";
+        
+        if (tipo === 'Lote / Terreno') {
+            mensajeFinal = `Hola Danila! Soy ${nombre}. Tengo un TERRENO en ${direccion} y quiero saber el potencial de venta y m2 vendibles. Info extra: ${tiempo}`;
+        } else if (situacion === 'ya-publicado') {
+            mensajeFinal = `Hola Danila! Soy ${nombre}. Tengo un ${tipo} en ${direccion} que ya está publicado pero no se vende. Contexto: ${tiempo}.`;
+        } else {
+            mensajeFinal = `Hola Danila! Soy ${nombre}. Quiero vender mi ${tipo} en ${direccion}. Es la primera vez que publico y quiero arrancar con tu estrategia.`;
+        }
 
-            // El delay de 300ms es clave: le da tiempo a Google Ads de registrar el clic antes de abrir WhatsApp
-            setTimeout(() => {
-                const url = `https://wa.me/5491131635778?text=${encodeURIComponent(mensajeFinal)}`;
-                window.open(url, '_blank');
-            }, 300);
-        });
-    </script>
+        // Pequeño delay para asegurar que el tag de Google se dispare antes de salir de la página
+        setTimeout(() => {
+            const url = `https://wa.me/5491131635778?text=${encodeURIComponent(mensajeFinal)}`;
+            window.open(url, '_blank');
+        }, 300);
+    });
+</script>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJ82KS2L"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
