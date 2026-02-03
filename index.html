@@ -612,7 +612,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <div class="relative">
         <select id="situacion" class="w-full p-5 bg-slate-50 rounded-2xl border-none ring-1 ring-slate-100 font-bold italic appearance-none text-slate-900 cursor-pointer">
-            <option value="" disabled selected>¿En qué situación estás? *</option>
+            <option value="" disabled selected>¿En qué situación estás? </option>
             <option value="primera-vez">Aún no la puse en venta</option>
             <option value="ya-publicado">Ya la tengo publicada (sin éxito)</option>
         </select>
@@ -858,17 +858,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 'send_to': 'AW-11191760775/MnhwCOj1od0bEIfv0tgp'
             });
         }
+// Construcción del mensaje de WhatsApp personalizado
+let mensajeFinal = `Hola Danila! Soy ${nombre}. `;
 
-        // Construcción del mensaje de WhatsApp personalizado
-        let mensajeFinal = "";
-        
-        if (tipo === 'Lote / Terreno') {
-            mensajeFinal = `Hola Danila! Soy ${nombre}. Tengo un TERRENO en ${barrio} y quiero saber el potencial de venta y m2 vendibles. Info extra: ${tiempo}`;
-        } else if (situacion === 'ya-publicado') {
-            mensajeFinal = `Hola Danila! Soy ${nombre}. Tengo un ${tipo} en ${barrio} que ya está publicado pero no se vende. Contexto: ${tiempo}.`;
-        } else {
-            mensajeFinal = `Hola Danila! Soy ${nombre}. Quiero vender mi ${tipo} en ${barrio}. Es la primera vez que publico y quiero arrancar con tu estrategia.`;
-        }
+if (tipo === 'Lote / Terreno') {
+    // Si es terreno, siempre va con su mensaje específico (el campo "tiempo" es obligatorio aquí por lógica)
+    mensajeFinal += `Tengo un TERRENO en ${barrio} y quiero saber el potencial de venta y m2 vendibles. Info extra: ${tiempo}`;
+} else if (situacion === 'ya-publicado') {
+    // Si eligió que ya está publicado
+    mensajeFinal += `Tengo un ${tipo} en ${barrio} que ya está publicado pero no se vende. Contexto: ${tiempo}.`;
+} else if (situacion === 'primera-vez') {
+    // Si eligió que es la primera vez
+    mensajeFinal += `Quiero vender mi ${tipo} en ${barrio}. Es la primera vez que publico y quiero arrancar con tu estrategia.`;
+} else {
+    // CASO OPCIONAL: Si no seleccionó nada en situación
+    mensajeFinal += `Quiero consultar por la venta de mi ${tipo} en ${barrio}.`;
+}
 
         // Pequeño delay para asegurar que el tag de Google se dispare antes de salir de la página
         setTimeout(() => {
