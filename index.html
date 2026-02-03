@@ -595,7 +595,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <input id="nombre" type="text" placeholder="Tu Nombre *" required 
            class="w-full p-5 bg-slate-50 rounded-2xl outline-none ring-1 ring-slate-100 font-bold italic focus:ring-pink-500 transition-all text-slate-900">
     
-    <input id="direccion" type="text" placeholder="Dirección de la propiedad *" required 
+    <input id="barrio" type="text" placeholder="Barrio de la propiedad *" required 
            class="w-full p-5 bg-slate-50 rounded-2xl outline-none ring-1 ring-slate-100 font-bold italic focus:ring-pink-500 transition-all text-slate-900">
     
     <div class="relative">
@@ -611,7 +611,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
 
     <div class="relative">
-        <select id="situacion" required class="w-full p-5 bg-slate-50 rounded-2xl border-none ring-1 ring-slate-100 font-bold italic appearance-none text-slate-900 cursor-pointer">
+        <select id="situacion" class="w-full p-5 bg-slate-50 rounded-2xl border-none ring-1 ring-slate-100 font-bold italic appearance-none text-slate-900 cursor-pointer">
             <option value="" disabled selected>¿En qué situación estás? *</option>
             <option value="primera-vez">Aún no la puse en venta</option>
             <option value="ya-publicado">Ya la tengo publicada (sin éxito)</option>
@@ -627,7 +627,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
 
     <button type="submit" class="md:col-span-2 bg-gradient-action text-white py-6 rounded-3xl font-black text-2xl shadow-xl uppercase tracking-tighter italic transition-transform hover:scale-[1.02]">
-        Consultar a Danila
+        Solicitar Diagnóstico Inmobiliario
     </button>
 </form>            
             </div>
@@ -847,7 +847,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         e.preventDefault();
         
         const nombre = document.getElementById('nombre').value;
-        const direccion = document.getElementById('direccion').value;
+        const barrio = document.getElementById('barrio').value;
         const tipo = tipoSelect.value;
         const situacion = situacionSelect.value;
         const tiempo = tiempoInput.value;
@@ -863,11 +863,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         let mensajeFinal = "";
         
         if (tipo === 'Lote / Terreno') {
-            mensajeFinal = `Hola Danila! Soy ${nombre}. Tengo un TERRENO en ${direccion} y quiero saber el potencial de venta y m2 vendibles. Info extra: ${tiempo}`;
+            mensajeFinal = `Hola Danila! Soy ${nombre}. Tengo un TERRENO en ${barrio} y quiero saber el potencial de venta y m2 vendibles. Info extra: ${tiempo}`;
         } else if (situacion === 'ya-publicado') {
-            mensajeFinal = `Hola Danila! Soy ${nombre}. Tengo un ${tipo} en ${direccion} que ya está publicado pero no se vende. Contexto: ${tiempo}.`;
+            mensajeFinal = `Hola Danila! Soy ${nombre}. Tengo un ${tipo} en ${barrio} que ya está publicado pero no se vende. Contexto: ${tiempo}.`;
         } else {
-            mensajeFinal = `Hola Danila! Soy ${nombre}. Quiero vender mi ${tipo} en ${direccion}. Es la primera vez que publico y quiero arrancar con tu estrategia.`;
+            mensajeFinal = `Hola Danila! Soy ${nombre}. Quiero vender mi ${tipo} en ${barrio}. Es la primera vez que publico y quiero arrancar con tu estrategia.`;
         }
 
         // Pequeño delay para asegurar que el tag de Google se dispare antes de salir de la página
